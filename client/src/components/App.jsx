@@ -1,7 +1,32 @@
 import React from 'react';
+import MovieList from './MovieList.jsx';
+import Search from './Search.jsx';
 
-const App = (props) => (
-  <div>Hello World!</div>
-);
+var movies = [
+  {title: 'Mean Girls'},
+  {title: 'Hackers'},
+  {title: 'The Grey'},
+  {title: 'Sunshine'},
+  {title: 'Ex Machina'},
+];
 
-export default App;
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      movies: []
+    }
+  }
+
+  render() {
+    return (
+      <div>
+      <Search />
+      <MovieList movies={movies}/>
+      </div>
+    )
+  }
+};
+
+  export default App;
