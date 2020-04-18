@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import Movie from './Movie.jsx'
 
 const MovieList = (props) => (
-<table>
-  <tr><th>Movie list</th></tr>
-  <tbody>
+
+
+  <ul>
     { props.movies.map((movie, idx) =>
         <Movie key={movie.title + idx} movie={movie}/>
     )}
-   </tbody>
-</table>
+  </ul>
+
+
 )
 
 export default MovieList;
