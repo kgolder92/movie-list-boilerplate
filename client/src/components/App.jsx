@@ -2,6 +2,7 @@ import React from 'react';
 import MovieList from './MovieList.jsx';
 import Search from './Search.jsx';
 import AddMovie from './AddMovie.jsx'
+// import WatchedBtn from '/WatchedBtn.jsx
 
 var movies = [
   {title: 'Mean Girls'},
@@ -43,8 +44,6 @@ class App extends React.Component {
       let filteredMovies = [];
       let moviesState = this.state.movies;
       for(let currentMovie of moviesState) {
-        console.log('currentMovie.title.toLowerCase()', currentMovie.title.toLowerCase());
-        console.log('searchQuery.toLowerCase()', searchQuery.toLowerCase());
         if(currentMovie.title.toLowerCase() === searchQuery.toLowerCase()){
           console.log('in here')
           filteredMovies.push({title: searchQuery})
