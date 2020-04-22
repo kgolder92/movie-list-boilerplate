@@ -4,7 +4,7 @@ const path = require('path');
 const db = require('../database');
 const PORT = 3000 || process.env.PORT;
 
-app.use(express.static(path.resolve('__dirname', '..', 'public')));
+app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.use(express.json());
 
 app.get('/movies', (req, res) => {
@@ -12,13 +12,13 @@ app.get('/movies', (req, res) => {
     if(err) {
       res.status(500).send(err);
     } else {
-      res.json(results);
+      res.send(results);
     }
   })
 })
 
 app.post('/movies', (req, res) => {
-  let queryString =  `INSERT INTO movies (movie) VALUES (?)`;
+  let queryString =  `INSERT INTO movies (title) VALUES (?)`;
   //INSERT INTO movies (movie) VALUES("spiderman");
   db.query(queryString, [req.body.movie], (err, results) => {
     if(err) {

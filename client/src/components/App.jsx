@@ -1,15 +1,17 @@
 import React from 'react';
+import axios from 'axios';
+
 import MovieList from './MovieList.jsx';
 import Search from './Search.jsx';
 import AddMovie from './AddMovie.jsx'
 
-var movies = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'Sunshine'},
-  {title: 'Ex Machina'},
-];
+// var movies = [
+//   {title: 'Mean Girls'},
+//   {title: 'Hackers'},
+//   {title: 'The Grey'},
+//   {title: 'Sunshine'},
+//   {title: 'Ex Machina'},
+// ];
 
 class App extends React.Component {
   constructor(props) {
@@ -22,20 +24,40 @@ class App extends React.Component {
     }
     this.addMovie = this.addMovie.bind(this);
     this.filterMovies = this.filterMovies.bind(this);
+    this.fetchMovies = this.fetchMovies.bind(this);
   }
 
-    // ComponentDidMount() {
-    //   setTimeout(() => this.setState({ movies }), 100)
-    // }
+  componentDidMount() {
+      // axios.get('/movies')
+      //   .then(({data}) => this.setState({ movies: data }))
+      this.fetchMovies();
+    }
+
+    fetchMovies() {
+      axios.get('/movies')
+      //   .then(({data}) => {
+      //     this.setState({ title: data })
+      //   console.log(data)
+      //  })
+      .then(({data}) => {
+        console.log(data)
+        this.setState({movies: data})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
     addMovie(movie) {
-      console.log(movie)
-      const movies = [...this.state.movies]
-      movies.push(movie);
+      // console.log(movie)
+      // const movies = [...this.state.movies]
+      // movies.push(movie);
 
-      this.setState({
-        movies
-      })
+      // this.setState({
+      //   movies
+      // })
+      axios.post('/movies', movie)
+        .then(() => this.fetchMovies())
     }
 
     filterMovies({ searchQuery }) {
