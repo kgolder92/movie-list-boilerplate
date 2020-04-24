@@ -25,38 +25,34 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
     this.filterMovies = this.filterMovies.bind(this);
     this.fetchMovies = this.fetchMovies.bind(this);
+    this.toggleWatched = this.toggleWatched.bind(this);
   }
 
   componentDidMount() {
-      // axios.get('/movies')
-      //   .then(({data}) => this.setState({ movies: data }))
       this.fetchMovies();
     }
 
     fetchMovies() {
       axios.get('/movies')
-      //   .then(({data}) => {
-      //     this.setState({ title: data })
-      //   console.log(data)
-      //  })
       .then(({data}) => {
         console.log(data)
         this.setState({movies: data})
       })
       .catch((err) => {
-        console.log(err)
+        console.log('err!!!')
       })
     }
 
     addMovie(movie) {
-      // console.log(movie)
-      // const movies = [...this.state.movies]
-      // movies.push(movie);
-
-      // this.setState({
-      //   movies
-      // })
       axios.post('/movies', movie)
+        .then(() => this.fetchMovies())
+    }
+
+    toggleWatched(id) {
+      //get id of movie that watched button was clicked on
+      //update that movie(id) to have a watched state
+      console.log('hit watched')
+      axios.put(`/movie/${id}`)
         .then(() => this.fetchMovies())
     }
 
@@ -87,7 +83,7 @@ class App extends React.Component {
         <header><h1>Movie  List</h1></header>
         <Search filterMovies={this.filterMovies} />
         <AddMovie addMovie={this.addMovie} />
-        <MovieList movies={this.state.filteredMovies.length === 0 ? movies : this.state.filteredMovies}/>
+        <MovieList movies={this.state.filteredMovies.length === 0 ? movies : this.state.filteredMovies} toggleWatched={this.toggleWatched}/>
       </div>
     )
   }

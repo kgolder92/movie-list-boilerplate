@@ -20,7 +20,7 @@ app.get('/movies', (req, res) => {
 app.post('/movies', (req, res) => {
   let queryString =  `INSERT INTO movies (title) VALUES (?)`;
   //INSERT INTO movies (movie) VALUES("spiderman");
-  db.query(queryString, [req.body.movie], (err, results) => {
+  db.query(queryString, [req.body.title], (err, results) => {
     if(err) {
       res.status(500).send(err);
     } else {
@@ -29,6 +29,10 @@ app.post('/movies', (req, res) => {
   })
 })
 
+app.put('/movie', (req, res) => {
+  console.log([req.query])
+  res.send('hello')
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
