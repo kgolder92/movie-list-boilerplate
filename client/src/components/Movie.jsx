@@ -5,8 +5,7 @@ const Movie = (props) => (
     <p>
       {props.movie.title}
     </p>
-
-    <button onClick={() => props.toggleWatched(props.movie.id)}>Watched</button>
+    <button onClick={() => props.toggleWatched(props.movie.id, props.movie.watched)}>Watched</button>
   </div>
 )
 export default Movie;

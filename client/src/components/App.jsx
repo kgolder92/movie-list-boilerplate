@@ -43,16 +43,41 @@ class App extends React.Component {
       })
     }
 
+    /*
+
+
+   GET with body
+   axios.get('/movies')
+    .then(({data}) => {
+      this.setState({movies: data})
+    })
+    .catch(err => console.log(err))
+
+    GET with params
+    axios.get(`/movies/${id}`)
+      .then(({data}) => {
+        this.setState({ movies: data })
+      })
+
+      POST
+      axios.post('/movies', movie)
+        .then(() => this.getMovies())
+        .catch(err) => console.log(err)
+    */
+
+
     addMovie(movie) {
       axios.post('/movies', movie)
         .then(() => this.fetchMovies())
     }
 
-    toggleWatched(id) {
+    toggleWatched(id, watched) {
       //get id of movie that watched button was clicked on
       //update that movie(id) to have a watched state
       console.log('hit watched')
-      axios.put(`/movie/${id}`)
+      axios.put(`/movie/${id}`, {
+        watched: !watched
+      })
         .then(() => this.fetchMovies())
     }
 
